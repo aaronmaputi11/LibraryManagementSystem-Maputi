@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Management - Library System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>📚 Library Manager</h1>
+                <p>Book Inventory & Borrowing System</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="books.html" class="active">Books</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="borrowing.html">Borrowing</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">📊 Overview</a></li>
+                        <li><a href="books.html" class="active">📖 Manage Books</a></li>
+                        <li><a href="members.html">👥 Manage Members</a></li>
+                        <li><a href="borrowing.html">📤 Borrowing Logs</a></li>
+                        <li><a href="#" onclick="loadStats()">📈 Statistics</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Book Inventory</h2>
+                            <p>Manage library book collection</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openModal('bookModal')">+ Add Book</button>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" id="searchBooks" placeholder="Search by title, author, or category...">
+                        <button class="btn btn-primary" onclick="searchBooks()">Search</button>
+                        <button class="btn btn-secondary" onclick="loadBooks()">Reset</button>
+                    </div>
+
+                    <!-- Books Table -->
+                    <div class="table-responsive" id="booksContainer">
+                        <p style="text-align: center; color: #7f8c8d;">Loading books...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="bookModalTitle">Add New Book</h2>
+                <button class="close" onclick="closeModal('bookModal')">&times;</button>
+            </div>
+            <form id="bookForm" onsubmit="saveBook(event)">
+                <input type="hidden" id="bookId" name="bookId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" id="isbn" name="isbn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher">Publisher</label>
+                        <input type="text" id="publisher" name="publisher">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="publication_year">Publication Year</label>
+                        <input type="number" id="publication_year" name="publication_year">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" name="category">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total_copies">Total Copies</label>
+                        <input type="number" id="total_copies" name="total_copies" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location_shelf">Location/Shelf</label>
+                        <input type="text" id="location_shelf" name="location_shelf">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Brief description of the book..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">Save Book</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('bookModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/books.js"></script>
+</body>
+</html>

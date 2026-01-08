@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>📚 Library Manager</h1>
+                <p>Book Inventory & Borrowing System</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="borrowing.html">Borrowing</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active" onclick="loadDashboard()">📊 Overview</a></li>
+                        <li><a href="books.html">📖 Manage Books</a></li>
+                        <li><a href="members.html">👥 Manage Members</a></li>
+                        <li><a href="borrowing.html">📤 Borrowing Logs</a></li>
+                        <li><a href="#" onclick="loadStats()">📈 Statistics</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Stats Cards -->
+                <div class="stats-grid" id="statsContainer">
+                    <div class="stat-card books">
+                        <h3>Total Books</h3>
+                        <div class="number" id="totalBooks">0</div>
+                    </div>
+                    <div class="stat-card members">
+                        <h3>Total Members</h3>
+                        <div class="number" id="totalMembers">0</div>
+                    </div>
+                    <div class="stat-card borrowed">
+                        <h3>Currently Borrowed</h3>
+                        <div class="number" id="currentBorrows">0</div>
+                    </div>
+                    <div class="stat-card overdue">
+                        <h3>Overdue Books</h3>
+                        <div class="number" id="overdueBooks">0</div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Current Borrowed Books</h2>
+                            <p>Books currently checked out</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="location.href='borrowing.html'">View All</button>
+                    </div>
+                    <div class="table-responsive" id="recentBorrowsContainer">
+                        <p style="text-align: center; color: #7f8c8d;">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Overdue Books -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Overdue Books</h2>
+                            <p>Books not returned by due date</p>
+                        </div>
+                        <button class="btn btn-danger" onclick="location.href='borrowing.html'">Manage</button>
+                    </div>
+                    <div class="table-responsive" id="overdueContainer">
+                        <p style="text-align: center; color: #7f8c8d;">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

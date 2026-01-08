@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing Management - Library System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>📚 Library Manager</h1>
+                <p>Book Inventory & Borrowing System</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="borrowing.html" class="active">Borrowing</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">📊 Overview</a></li>
+                        <li><a href="books.html">📖 Manage Books</a></li>
+                        <li><a href="members.html">👥 Manage Members</a></li>
+                        <li><a href="borrowing.html" class="active">📤 Borrowing Logs</a></li>
+                        <li><a href="#" onclick="loadStats()">📈 Statistics</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- New Borrow -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Record Book Borrowing</h2>
+                    </div>
+                    <form id="borrowForm" onsubmit="recordBorrow(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="member_id">Member</label>
+                                <select id="member_id" name="member_id" required onchange="loadMemberBorrowHistory()">
+                                    <option value="">-- Select Member --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="book_id">Book</label>
+                                <select id="book_id" name="book_id" required>
+                                    <option value="">-- Select Book --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="borrow_date">Borrow Date</label>
+                                <input type="date" id="borrow_date" name="borrow_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="due_date">Due Date</label>
+                                <input type="date" id="due_date" name="due_date" required>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-success">Record Borrow</button>
+                            <button type="reset" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Current Borrows -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Active Borrowing Records</h2>
+                            <p>Books currently borrowed by members</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="borrowsContainer">
+                        <p style="text-align: center; color: #7f8c8d;">Loading borrowing records...</p>
+                    </div>
+                </div>
+
+                <!-- Overdue Books -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📢 Overdue Books</h2>
+                    </div>
+                    <div class="table-responsive" id="overdueContainer">
+                        <p style="text-align: center; color: #7f8c8d;">Loading overdue records...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Return Book Modal -->
+    <div id="returnModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Return Book</h2>
+                <button class="close" onclick="closeModal('returnModal')">&times;</button>
+            </div>
+            <form id="returnForm" onsubmit="submitReturn(event)">
+                <input type="hidden" id="returnBorrowId">
+
+                <div class="form-group">
+                    <label for="return_date">Return Date</label>
+                    <input type="date" id="return_date" name="return_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fine Amount (Auto-calculated)</label>
+                    <input type="text" id="fineAmount" readonly style="background: #ecf0f1;">
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">Confirm Return</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('returnModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/borrowing.js"></script>
+</body>
+</html>
